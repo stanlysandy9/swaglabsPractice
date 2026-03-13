@@ -2,7 +2,7 @@ import { assert } from "node:console";
 import { expect, test } from "../fixtures/loginFixture";
 import { HomePage } from "../Pages/homePage";
 
-test("TC001 @login to application", async ({ mainPage, homePage, page, context }) => {
+test("TC001 @login to application", async ({ mainPage, homePage, page, context, browser }) => {
     //await mainPage.goToLoginPage();
     //await mainPage.loginToApp();
     //await homePage.getAllProducts();
@@ -15,6 +15,17 @@ await expect(newTab).toHaveTitle("Google");
 const pages= context.pages();
 await pages[0].bringToFront();
 await homePage.logout();
+
+await context.close();
+
+const newContext= await browser.newContext();
+const newsession = await newContext.newPage();
+
+await newsession.goto('https://www.google.com');
+await newContext.clearCookies();
+await newsession.close();
+
+
 });
 
 
