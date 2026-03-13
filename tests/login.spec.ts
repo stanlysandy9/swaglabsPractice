@@ -24,6 +24,10 @@ const newsession = await newContext.newPage();
 await newsession.goto('https://www.google.com');
 await newContext.clearCookies();
 await newsession.close();
+});
+
+test ("select the dropdown", async ({mainPage, page})=>{
+    await page.selectOption('[data-test="product-sort-container"]','hilo');
 
 
 });
